@@ -7,7 +7,7 @@ http.createServer(function(req, res){
 	var ext = path.extname(filename);
 	var localpath = __dirname + "/public/";
 
-	if(ext == ".html"){
+	if(ext == ".html" || ext == ".css"){
 		localpath += filename;
 
 		fs.exists(localpath, function(exists){
