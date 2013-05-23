@@ -1,6 +1,10 @@
 var fs = require("fs");
 var http = require("http");
 var path = require("path");
+var config = JSON.parse( fs.readFileSync('config.json') );
+
+var host = config.host;
+var port = config.port;
 
 http.createServer(function(req, res){
 	var filename = path.basename(req.url) || "index.html";
@@ -21,7 +25,7 @@ http.createServer(function(req, res){
 	}
 }).listen(8000);
 
-console.log("Server started: http://127.0.0.1:8000");
+console.log("Server started: " + host + ":" + port);
 
 /**
  * Reads the local file and returns the request
