@@ -1,0 +1,10 @@
+{
+  "name": "FTP-Node",
+  "version": "0.0.1",
+  "description": "A node FTP client",
+  "author": "Doug Bjornholm",
+    "dependencies" : {
+      "jsftp" : "0.6.0"
+    },
+  "readmeFilename": "README.md"
+}
