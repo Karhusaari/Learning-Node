@@ -1,4 +1,6 @@
 var fs = require("fs");
+var async = require("async");
+var _dir = "./files/";
 
 var writeStream = fs.createWriteStream("./log.txt", 
 	{
@@ -8,31 +10,59 @@ var writeStream = fs.createWriteStream("./log.txt",
 	});
 
 try{
-	fs.readdir('./files/', function(err, files){
-		files.forEach(function(name){
+	async.waterfall([
 
-			fs.stat('./files/' + name, function(err, stats){
-				if(err) throw err;
-				if( stats.isFile() ){
-					fs.readFile('./files/' + name, 'utf8', function(err, data){
-					if(err){ throw err; }
-						var adjData = data.replace(/karhusaari/g, "bjornholm");
-
-						fs.writeFile("./files/" + name, adjData, function(err){
-							if(err){ throw err; }
-
-							//log
-							writeStream.write('\nchanged: ' + name + '\n', 'utf8', function(err){
-								if(err){ throw err; }
-							});
-						});
-
-					});
-				}
+		function readDir(callback){
+			fs.readdir(_dir, function(err, files){
+				callback(err, files);
 			});
-			
-		});
+		},
+
+		function loopFiles(files, callback){
+			files.forEach(function(name){
+				callback(null, name);
+			});
+		},
+
+		function checkFile(file, callback){
+			fs.stat(_dir + file, function(err, stats){
+				callback(err, stats, file);
+			});
+		},
+
+		function readData(stats, file, callback){
+			if( stats.isFile() ){
+				fs.readFile(_dir + file, 'utf8', function(err, data){
+					callback(err, file, data);
+				});
+			}
+		},
+
+		function modify(file, text, callback){
+			var adjData = text.replace(/karhusaari/g, "bjornholm");
+			callback(null, file, adjData);
+		},
+
+		function writeData(file, text, callback){
+			fs.writeFile(_dir + file, text, function(err){
+				callback(err, file);
+			});
+		},
+
+		function logChange(file, callback){
+			writeStream.write("Changed: " + file + "\n", "utf8", function(err){
+				callback(err, file);
+			});
+		},
+
+	], function(err, result){
+		if(err){
+			throw err;
+		}else{
+			console.log("modified: " + result);
+		}
 	});
+
 }catch(err){
 	console.error( util.inspect(err) );
 }
