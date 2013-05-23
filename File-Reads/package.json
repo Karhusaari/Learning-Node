@@ -1,0 +1,11 @@
+{
+  "name": "file-reads",
+  "version": "0.0.1",
+  "description": "reads and writes file data",
+  "main": "readFiles.js",
+  "dependencies": {
+    "async": "~0.2.8"
+  },
+  "devDependencies": {},
+  "author": "db"
+}
