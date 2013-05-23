@@ -1,0 +1,19 @@
+{
+  "name": "Learning-Node",
+  "version": "0.0.1",
+  "description": "A project of different Node.js applications for learning purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Learning-Node"
+  },
+  "keywords": [
+    "nod.js"
+  ],
+  "author": "Doug Bjornholm",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
