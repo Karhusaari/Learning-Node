@@ -25,7 +25,7 @@ http.createServer(function(req, res){
 	}
 }).listen(8000);
 
-console.log("Server started: " + host + ":" + port);
+console.log(config.name + " started: " + host + ":" + port);
 
 /**
  * Reads the local file and returns the request
