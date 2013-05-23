@@ -5,4 +5,5 @@ A basic Node.js webserver
 ## TODO
 - [ ] add mime support
 - [ ] add express 
-- [ ] add connect middleware 
+- [ ] add connect middleware
+- [X] add config file support 
