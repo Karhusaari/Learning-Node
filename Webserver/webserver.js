@@ -1,6 +1,7 @@
 var fs = require("fs");
 var http = require("http");
 var path = require("path");
+var mime = require("mime");
 var config = JSON.parse( fs.readFileSync('config.json') );
 
 var host = config.host;

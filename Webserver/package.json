@@ -1,0 +1,11 @@
+{
+  "name": "Webserver",
+  "version": "0.0.2",
+  "description": "Basic Webserver",
+  "main": "webserver.js",
+  "dependencies": {
+    "mime": "~1.2.9"
+  },
+  "devDependencies": {},
+  "author": "db"
+}
