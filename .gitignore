@@ -1,5 +1,3 @@
 learningNode.sublime-*
 
-File-Reads/node_modules/*
-Webserver/node_modules/*
-FTP/node_modules/*
+*/node_modules/*
