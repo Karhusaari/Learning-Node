@@ -1,12 +1,24 @@
 var net = require('net');
 
 var chatServer = net.createServer();
+var clientList = [];
 
 chatServer.on('connection', function(client){
-	client.write('hullo\n');
-	client.write('bye\n');
+	client.name = client.remoteAddress + ":" + client.remotePort;
+	client.write('hullo ' + client.name + "\n");
 
-	client.end();
+	clientList.push(client);
+
+	client.on('data', function(data){
+		broadcast(data, client);
+	});
 });
 
+function broadcast(message, client){
+	for (var i=0; i<clientList.length; i+=1) {
+		if(client !== clientList[i]){
+			clientList[i].write(client.name + " says " + message);
+		}
+	}
+}
 chatServer.listen(9000);
