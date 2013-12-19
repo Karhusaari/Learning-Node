@@ -1,5 +1,6 @@
 var fs = require("fs");
 var async = require("async");
+var util = require("util");
 var _dir = "./files/";
 
 var writeStream = fs.createWriteStream("./log.txt", 
@@ -39,7 +40,7 @@ try{
 		},
 
 		function modify(file, text, callback){
-			var adjData = text.replace(/karhusaari/g, "bjornholm");
+			var adjData = text.replace(/bjornholm/g, "karhusaari");
 			callback(null, file, adjData);
 		},
 
@@ -50,9 +51,13 @@ try{
 		},
 
 		function logChange(file, callback){
+
+			util.log('File Changed: ' + file);
+			/*
 			writeStream.write("Changed: " + file + "\n", "utf8", function(err){
 				callback(err, file);
 			});
+			*/
 		},
 
 	], function(err, result){
